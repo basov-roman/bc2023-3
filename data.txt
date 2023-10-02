@@ -1,24 +1,10 @@
 [
   {
-    "dt": "20200701",
     "txt": "Доходи, усього",
-    "txten": "Income, total",
-    "id_api": "BS2_IncomeTotal",
-    "leveli": 2,
-    "parent": "BS2_NetProfitLoss",
-    "freq": "Q",
-    "tzep": "f_m_vc",
     "value": 128620.1198
   },
   {
-    "dt": "20200701",
     "txt": "Витрати, усього",
-    "txten": "Expenses, total",
-    "id_api": "BS2_ExpensesTotal",
-    "leveli": 2,
-    "parent": "BS2_NetProfitLoss",
-    "freq": "Q",
-    "tzep": "f_m_vc",
     "value": 104830.469
   }
 ]

@@ -7,11 +7,12 @@ fs.readFile('data.json', 'utf8', (err, data) => {
   }
 
   try {
-    const jsonData = JSON.parse(data);
+    const jsonData = JSON.parse(data); 
 
     const filteredData = jsonData.filter(item => item.txt === "Доходи, усього" || item.txt === "Витрати, усього");
+    const filteredData2 = filteredData.map(item => ({ txt: item.txt, value: item.value }));
 
-    const txtData = JSON.stringify(filteredData, null, 2);
+    const txtData = JSON.stringify(filteredData2, null, 2);
 
     fs.writeFile('data.txt', txtData, 'utf8', (err) => {
       if (err) {
