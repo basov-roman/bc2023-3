@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs'); // Підключаємо модуль fs для роботи з файлами
 
 fs.readFile('data.json', 'utf8', (err, data) => {
   if (err) {
@@ -7,20 +7,22 @@ fs.readFile('data.json', 'utf8', (err, data) => {
   }
 
   try {
-    const jsonData = JSON.parse(data); 
+    const jsonData = JSON.parse(data); // Розпарсимо JSON дані
 
-    const filteredData = jsonData.filter(item => item.txt === "Доходи, усього" || item.txt === "Витрати, усього");
-    const filteredData2 = filteredData.map(item => ({ txt: item.txt, value: item.value }));
+    // Відкриваємо файл для запису
+    const stream = fs.createWriteStream('output.txt', { flags: 'w' });
 
-    const txtData = JSON.stringify(filteredData2, null, 2);
-
-    fs.writeFile('data.txt', txtData, 'utf8', (err) => {
-      if (err) {
-        console.error('Помилка при записі у файл txt:', err);
-      } else {
-        console.log('Дані успішно записано у файл data.txt');
+    // Цикл для обробки кожного об'єкта та запису у файл тільки для "Доходи, усього" і "Витрати, усього"
+    for (const item of jsonData) {
+      if (item.txt === "Доходи, усього" || item.txt === "Витрати, усього") {
+        const line = `${item.txt}:${item.value}\n`; // Форматуємо рядок у відповідний формат
+        stream.write(line); // Записуємо рядок у файл
       }
-    });
+    }
+
+    stream.end(); // Завершуємо запис у файл
+
+    console.log('Дані успішно записано у файл output.txt');
   } catch (error) {
     console.error('Помилка при розпарсюванні JSON:', error);
   }
